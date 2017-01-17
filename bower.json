@@ -1,0 +1,9 @@
+{
+  "name": "neofonie css-sprite-positionizer",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "3.1.1",
+    "lodash": "4.15.0",
+    "zeroclipboard": "2.2.0"
+  }
+}

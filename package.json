@@ -1,0 +1,31 @@
+{
+  "name": "neofonie",
+  "description": "",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-cli": "1.2.0",
+    "grunt-template": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-connect": "latest",
+    "connect-livereload": "latest",
+    "grunt-contrib-watch": "latest",
+    "bower": "latest",
+    "grunt-assemble": "latest",
+    "load-grunt-config": "latest",
+    "time-grunt": "latest",
+    "jit-grunt": "0.9.1",
+    "json5": "latest",
+    "lodash": "latest"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "bowerInstall": "bower install",
+    "gruntVersion": "grunt --version",
+    "grunt": "grunt"
+  }
+}

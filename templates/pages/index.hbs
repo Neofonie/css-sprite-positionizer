@@ -1,0 +1,79 @@
+{{>headline headline="Sprite Editor" subline="Here you get the positiondata for your sprite piece" headline_tag="h1"}}
+<div class="container">
+    <div class="container__inner container__inner--1-per-line">
+        <div class="headline-component--remove-space">
+            {{>headline headline="Save sectionsdata" helpline="Save the data into your browser to use this later or inside the author" headline_tag="h2"}}
+        </div>
+        <div>
+            <div class="half">
+                <input class="inp--save-section" type="text" value="" placeholder="give the pieces a name"/>
+                <a class="button button--small btn--save-section">save sections</a>
+            </div>
+            <div class="half">
+                <select class="input-style slct--set-section">
+                    <option>no sections saved yet</option>
+                </select>
+                <a class="button button--small btn--delete-section" style="display: none;">delete section</a>
+            </div>
+        </div>
+        <div class="headline-component--remove-space">
+            <div class="half">
+                {{>headline headline="Sectionpreview" subline="Normal" helpline="This data is for your dialog, copy and paste them." headline_tag="h2"}}
+            </div>
+            <div class="half">
+                {{>headline headline="&nbsp;" subline="Retina" helpline="Change the values to the correct position.<br />You can also use the arrow-keys." headline_tag="h2"}}
+            </div>
+        </div>
+        <div>
+            <div class="quarter">
+                x: <input class="input--pos piece-x" type="number" value="0"/> px
+                <div class="spacer"></div>
+                y: <input class="input--pos piece-y" type="number" value="0"/> px
+            </div>
+            <div class="quarter">
+                width: <input class="input--pos piece-w" type="number" value="0"/> px
+                <div class="spacer"></div>
+                height: <input class="input--pos piece-h" type="number" value="0"/> px
+            </div>
+            <div class="quarter">
+                x: <input class="input--pos piece-x is-retina" type="number" value="0"/> px
+                <div class="spacer"></div>
+                y: <input class="input--pos piece-y is-retina" type="number" value="0"/> px
+            </div>
+            <div class="quarter">
+                width: <input class="input--pos piece-w is-retina" type="number" value="0"/> px
+                <div class="spacer"></div>
+                height: <input class="input--pos piece-h is-retina" type="number" value="0"/> px
+            </div>
+
+        </div>
+        <div>
+            <div class="half">
+                <div class="sprite sprite--preview preview--normal"></div>
+            </div>
+            <div class="half">
+                <div class="sprite sprite--preview preview--retina"></div>
+            </div>
+        </div>
+        <div class="headline-component--remove-space">
+            {{>headline headline="Sprite with pieces" helpline="Click to set the left/top position of your selected piece.<br />Drag & drop and also use the arrow-keys to positionize the selected piece." headline_tag="h2"}}
+        </div>
+        <div>
+            <div class="full">
+                <div class="sprite--wrapper">
+                    <div class="sprite-piece cursor-move">
+                        <div class="sprite-resize"></div>
+                    </div>
+                    <div class="sprite-piece is-retina cursor-move">
+                        <div class="sprite-resize"></div>
+                    </div>
+                    <img class="sprite sprite--image"/>
+                </div>
+
+                <div class="spacer"></div>
+                width: <input id="spriteW" class="input--pos" type="number" value=""/> px &nbsp;
+                height: <input id="spriteH" class="input--pos" type="number" value=""/> px
+            </div>
+        </div>
+    </div>
+</div>

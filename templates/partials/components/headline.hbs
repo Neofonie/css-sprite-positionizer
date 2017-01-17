@@ -1,0 +1,15 @@
+{{#if headline}}
+<div class="{{#multiLine this}}
+    headline-component
+    headline-component--{{#if align}}{{align}}{{else}}left{{/if}}
+    {{#if modifier}}headline-component--{{modifier}}{{/if}}
+    {{#if without-space}}headline-component--without-space{{/if}}
+    {{#if with-underline}}headline-component--with-underline{{/if}}
+    {{/multiLine}}">
+    {{#xif "typeof this.headline === 'string'"}}
+        <{{#if headline_tag}}{{headline_tag}}{{else}}h1{{/if}} class="headline-component__headline">
+            {{{headline}}}
+        </{{#if headline_tag}}{{headline_tag}}{{else}}h1{{/if}}>
+    {{/xif}}
+</div>
+{{/if}}
