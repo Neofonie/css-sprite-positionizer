@@ -10,7 +10,5 @@ A tool to get your coordinates out of the sprite, for regular and retina piece.
 * npm run bowerInstall
 * grunt serve
 
-## Examples
-See the example in the respository.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/asafdav/ng-scrollbar/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+## http://localhost:9000/
+* use the param #spriteImage=URL-TO-IMAGE for external sprites
