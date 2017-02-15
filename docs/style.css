@@ -1,0 +1,119 @@
+body {
+    font-family: 'Playfair Display', serif;
+}
+
+h1 {
+    margin-top: 10px;
+    line-height: 45px;
+}
+
+h2 {
+    margin-top: 10px;
+    line-height: 35px;
+}
+
+input, textarea {
+    font-family: verdana;
+    background: #7F7F7F;
+    border: 0;
+    color: #fff;
+    padding: 2px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 20px;
+    outline: 0;
+}
+
+textarea {
+    width: 300px;
+    height: 280px;
+    -webkit-transition: background 250ms ease-in-out;
+    -moz-transition: background 250ms ease-in-out;
+    -o-transition: background 250ms ease-in-out;
+    transition: background 250ms ease-in-out;
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+    background: #979797;
+}
+
+textarea.copied {
+    background: #fff;
+}
+
+.cursor-move {
+    cursor: move;
+    user-select: none;
+}
+
+.quarter {
+    width: 25%;
+}
+
+.half {
+    width: 50%;
+}
+
+.full {
+    width: 100%;
+}
+
+.input--pos {
+    width: 70px;
+}
+
+.sprite.sprite--image,
+.sprite.sprite--preview {
+    background-repeat: no-repeat, repeat;
+}
+
+.sprite {
+    border: 1px #E9E9E9 solid;
+    display: inline-block;
+}
+
+.spacer {
+    height: 16px;;
+}
+
+.is-selected {
+    outline: solid #e60a1e 2px;
+}
+
+.sprite--wrapper {
+    position: relative;
+    user-select: none;
+}
+
+.sprite-piece {
+    position: absolute;
+    z-index: 1;
+    background: rgba(255, 0, 0, 0.3);
+}
+
+.sprite-piece:hover {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.sprite-piece.is-selected {
+    z-index: 2;
+}
+
+.sprite-resize {
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: solid 1px #ccc;
+    cursor: nwse-resize;
+    opacity: 0.75;
+}
+
+.sprite-resize:hover {
+    border: solid 1px #000;
+    opacity: 1;
+}
