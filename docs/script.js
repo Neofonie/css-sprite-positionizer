@@ -82,7 +82,7 @@ $(function () {
         css = "\
             .sprite.sprite--image,\
             .sprite.sprite--preview {\
-                background-image: url(" + params.spriteImage + "), url(/trans-bg.jpg);\
+                background-image: url(" + params.spriteImage + "), url(trans-bg.jpg);\
             }\
         ";
 
