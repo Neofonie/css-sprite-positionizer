@@ -20,7 +20,6 @@ module.exports = function (grunt) {
             bowerFolder: "bower_components"
         };
 
-
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         globalConfig: globalConfig

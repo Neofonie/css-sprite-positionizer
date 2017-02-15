@@ -11,5 +11,13 @@
             {{{headline}}}
         </{{#if headline_tag}}{{headline_tag}}{{else}}h1{{/if}}>
     {{/xif}}
+    {{#xif "typeof this.subline === 'string'"}}
+        <{{#if subline_tag}}{{subline_tag}}{{else}}h2{{/if}} class="headline-component__subline">
+            {{{subline}}}
+        </{{#if subline_tag}}{{subline_tag}}{{else}}h2{{/if}}>
+    {{/xif}}
+    {{#if helpline}}
+        <h2 class="headline-component__helpline">{{{helpline}}}</h2>
+    {{/if}}
 </div>
 {{/if}}

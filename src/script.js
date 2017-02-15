@@ -16,8 +16,9 @@ $(function () {
         classNameMove = "cursor-move",
         classNameSelected = "is-selected",
         classNameIsRetina = "is-retina",
-        storageName = "spriteHandler",
+        classNameCopied = "copied",
         $body = $(document.body),
+        $spriteUrl = $("#spriteUrl"),
         $spriteW = $("#spriteW"),
         $spriteH = $("#spriteH"),
         $pieceX = $(".piece-x"),
@@ -28,13 +29,10 @@ $(function () {
         $image = $(".sprite--image"),
         $spritePieces = $(".sprite-piece"),
         $spriteResize = $(".sprite-resize"),
+        $textareaGeneratedCss = $("#textareaGeneratedCss"),
         $previewBoxes = $(".sprite--preview"),
         $previewNormal = $(".preview--normal"),
         $previewRetina = $(".preview--retina"),
-        $saveInp = $(".inp--save-section"),
-        $saveBtn = $(".btn--save-section"),
-        $setSelect = $(".slct--set-section"),
-        $deleteBtn = $(".btn--delete-section"),
         px = "px",
         transBgDim = 20,
         shouldRetinaSelected = false,
@@ -42,6 +40,7 @@ $(function () {
         changePos = false,
         resizePiece = false,
         disableKeys = false,
+        cssData = {},
         startPos;
 
     function isRetinaSelected() {
@@ -76,8 +75,8 @@ $(function () {
             $spriteImg = $(new Image()),
             css;
 
-        if (!params.spriteImage) {
-            params.spriteImage = "/sprite.png";
+        if ($spriteUrl.val()) {
+            params.spriteImage = $spriteUrl.val();
         }
 
         css = "\
@@ -96,7 +95,8 @@ $(function () {
             })
             .attr("src", params.spriteImage);
 
-        $("head").append("<style>" + css + "</style>");
+        $("#spriteCss").remove();
+        $("head").append("<style id='spriteCss'>" + css + "</style>");
         // set selected
         if (!shouldRetinaSelected) {
             $previewNormal.addClass(classNameSelected);
@@ -290,6 +290,13 @@ $(function () {
                 }
             }
         });
+
+        $spriteUrl.change(_.debounce(function () {
+            setCss();
+            setPreviewData();
+        }, 150));
+
+        $textareaGeneratedCss.click(copyCss);
     }
 
     function stayPreviewInBounds(thisX, thisY) {
@@ -374,6 +381,14 @@ $(function () {
                 width: parseInt($el("$pieceW", false).val()),
                 height: parseInt($el("$pieceH", false).val())
             };
+            cssData.normal = {
+                left: parseInt($el("$pieceX", false).val()),
+                top: parseInt($el("$pieceY", false).val()),
+                sizeW: parseInt($spriteW.val()),
+                sizeH: parseInt($spriteH.val()),
+                width: css.width,
+                height: css.height
+            };
             $previewNormal.css(css);
             if (options.updatePreviewPiece) {
                 $el("$spritePieces", false).css(previewCss);
@@ -382,7 +397,6 @@ $(function () {
         if (isRetinaSelected() || options.forceUpdate) {
             var newX = parseInt($el("$pieceX", true).val()),
                 newY = parseInt($el("$pieceY", true).val());
-
             retinaCSS = {
                 backgroundPosition: newX + px + " " + newY + px + transBgPos,
                 backgroundSize: ($spriteW.val() / 2) + px + " " + ($spriteH.val() / 2) + px + transBgSize,
@@ -395,7 +409,14 @@ $(function () {
                 width: parseInt($el("$pieceW", true).val()) * 2,
                 height: parseInt($el("$pieceH", true).val()) * 2
             };
-
+            cssData.retina = {
+                left: newX,
+                top: newY,
+                sizeW: ($spriteW.val() / 2),
+                sizeH: ($spriteH.val() / 2),
+                width: retinaCSS.width,
+                height: retinaCSS.height
+            };
             $previewRetina.css(retinaCSS);
             if (options.updatePreviewPiece) {
                 $el("$spritePieces", true).css(previewRetinaCss);
@@ -406,6 +427,8 @@ $(function () {
             console.log("css", css, "retinaCSS", retinaCSS);
             console.log("previewCss", previewCss, "previewRetinaCss", previewRetinaCss);
         }
+
+        generateCss();
     }
 
     function setPreviewData(coords, update) {
@@ -428,128 +451,69 @@ $(function () {
         }
     }
 
-    function setSaveHandler() {
-        $saveBtn.click(function () {
-            var name = $saveInp.val();
-            if (name === "") {
-                alert("enter a name for the data");
-            } else {
-                handleStorage("save-item", name, {
-                    normal: {
-                        x: $el("$pieceX", false).val(),
-                        y: $el("$pieceY", false).val(),
-                        w: $el("$pieceW", false).val(),
-                        h: $el("$pieceH", false).val()
-                    },
-                    retina: {
-                        x: $el("$pieceX", true).val(),
-                        y: $el("$pieceY", true).val(),
-                        w: $el("$pieceW", true).val(),
-                        h: $el("$pieceH", true).val()
-                    }
-                });
+    var cssGeneratedTpl = "" +
+        ".sprite {\n" +
+        "   background-url: \"{0}\";\n" +
+        "   background-size: {1} {2};\n" +
+        "   background-repeat: no-repeat;\n" +
+        "}\n" +
+        ".sprite--piece-normal {\n" +
+        "   background-position: {3} {4};\n" +
+        "   width: {5};\n" +
+        "   height: {6};\n" +
+        "}\n" +
+        ".sprite--piece-retina {\n" +
+        "   background-position: {7} {8};\n" +
+        "   background-size: {9} {10};\n" +
+        "   width: {11};\n" +
+        "   height: {12};\n" +
+        "}\n" +
+        "";
 
-                initSectionSelect();
-
-                $saveInp.val("");
-            }
-        });
-        $saveInp.keyup(function (event) {
-            if (event.keyCode === 13) {
-                $saveBtn.click();
-            }
-        });
-
-        initSectionSelect();
-
-        $setSelect.change(function () {
-            var coords = $setSelect.find(":selected").data("coords") || null;
-
-            if (coords !== null) {
-                $deleteBtn.show();
-                setPreviewData(coords, true);
-            } else {
-                $deleteBtn.hide();
-            }
-        });
-
-        $deleteBtn.click(function () {
-            var $selected = $setSelect.find(":selected"),
-                coords = $selected.data("coords") || null,
-                really;
-            if (coords !== null) {
-                really = confirm("Do you really want to delete '" + $selected.data("name") + "'?");
-                if (really) {
-                    handleStorage("delete", $selected.data("name"));
-                }
-            }
-        });
+    function generateCss() {
+        if (cssData.normal && cssData.retina) {
+            var generatedTpl = format(cssGeneratedTpl, [
+                $spriteUrl.val(), cssData.normal.sizeW, cssData.normal.sizeH,
+                cssData.normal.left, cssData.normal.top, cssData.normal.width, cssData.normal.height,
+                cssData.retina.left, cssData.retina.top, cssData.retina.sizeW, cssData.retina.sizeH, cssData.retina.width, cssData.retina.height
+            ]);
+            $textareaGeneratedCss.val(generatedTpl);
+        }
     }
 
-    function initSectionSelect() {
-        // select box handling
-        var allSections = handleStorage("get");
-
-        if (allSections.length > 0) {
-            $setSelect.html("");
-            $setSelect.append("<option>choose a saved section</option>");
-        }
-
-        $(allSections).each(function (i, section) {
-            var $option = $("<option>" + section.name + "</option>");
-            $option.data("name", section.name);
-            $option.data("coords", section.coords);
-            $setSelect.append($option);
+    function format(source, params) {
+        $.each(params, function (i, n) {
+            source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n + (typeof n === "number" && n !== 0 ? px : ""));
         });
+        return source;
     }
 
-    function handleStorage(action, key, value) {
-        var data, match;
-
-        switch (action) {
-            case "save-item":
-                data = handleStorage("get");
-                match = data.filter(function (section) {
-                    return section.name === key
-                });
-
-                if (match.length === 0) {
-                    data.push({
-                        name: key,
-                        coords: value
-                    });
-                    handleStorage("save", null, data);
-                } else {
-                    alert("There is already a section called '" + key + "'");
-                }
-
-                break;
-            case "delete":
-                data = handleStorage("get");
-                match = data.filter(function (section) {
-                    return section.name !== key;
-                });
-                handleStorage("save", null, match);
-
-                initSectionSelect();
-                break;
-            case "save":
-                localStorage.setItem(storageName, JSON.stringify(value));
-                break;
-            case "get":
-                data = localStorage.getItem(storageName);
-
-                if (data) {
-                    data = JSON.parse(data);
-                }
-
-                return data || [];
-                break;
+    function copyCss() {
+        $textareaGeneratedCss[0].select();
+        try {
+            var successful = document.execCommand("copy"),
+                msg = successful ? "successful" : "unsuccessful";
+            console.log("Copying text command was " + msg + " / " + $textareaGeneratedCss.val());
+            $textareaGeneratedCss.addClass(classNameCopied);
+        } catch (err) {
+            console.log("Oops, unable to copy");
         }
+
+        clearSelection();
+    }
+
+    function clearSelection() {
+        if (document.selection) {
+            document.selection.empty();
+        } else if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+        }
+        window.setTimeout(function () {
+            $textareaGeneratedCss.removeClass(classNameCopied);
+        }, 350);
     }
 
     setPreviewData(demoData);
     setEventHandler();
     setCss();
-    setSaveHandler();
 });

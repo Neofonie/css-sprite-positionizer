@@ -1,6 +1,6 @@
 {
-  "port": 9000,
-  "livereload": 9001,
+  "port": 9002,
+  "livereload": 9003,
 //   change this to "0.0.0.0" to access the server from outside
 // override this with --hostName=YOURHOST
   "hostName": "localhost"

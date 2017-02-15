@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <title>CSS - Sprite - Positionizr</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="theme-color" content="#ffbf00"/>
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/Neofonie/css-sprite-positionizer/master/src/style.css"/>
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/Neofonie/css-sprite-positionizer/master/src/theme.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.js"></script>
+    <script type="text/javascript" src="https://raw.githubusercontent.com/Neofonie/css-sprite-positionizer/master/src/script.js"></script>
+</head>
+<body class="body-tag">
+<div class="header"></div>
+<div class="content-area">
+    <div class="container">
+        <div class="container__inner container__inner--1-per-line">
+            <div class="headline-component--remove-space">
+                <div class="headline-component headline-component--left">
+                    <h1 class="headline-component__headline">
+                        CSS-Sprite-Positionizr
+                    </h1>
+
+                    <h2 class="headline-component__subline">
+                        Here you get the positiondata for your sprite piece
+                    </h2>
+                </div>
+            </div>
+            <div class="headline-component--remove-space">
+                <div class="half">
+                    <div class="headline-component headline-component--left">
+                        <h2 class="headline-component__headline">
+                            Sectionpreview
+                        </h2>
+
+                        <h2 class="headline-component__subline">
+                            Normal
+                        </h2>
+
+                        <h2 class="headline-component__helpline">Change the values to the correct position.</h2>
+                    </div>
+                </div>
+                <div class="half">
+                    <div class="headline-component headline-component--left">
+                        <h2 class="headline-component__headline">
+                            &nbsp;
+                        </h2>
+
+                        <h2 class="headline-component__subline">
+                            Retina
+                        </h2>
+
+                        <h2 class="headline-component__helpline">You can also use the arrow-keys.</h2>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="quarter">
+                    x: <input class="input--pos piece-x" type="number" value="0"/> px
+                    <div class="spacer"></div>
+                    y: <input class="input--pos piece-y" type="number" value="0"/> px
+                </div>
+                <div class="quarter">
+                    width: <input class="input--pos piece-w" type="number" value="0"/> px
+                    <div class="spacer"></div>
+                    height: <input class="input--pos piece-h" type="number" value="0"/> px
+                </div>
+                <div class="quarter">
+                    x: <input class="input--pos piece-x is-retina" type="number" value="0"/> px
+                    <div class="spacer"></div>
+                    y: <input class="input--pos piece-y is-retina" type="number" value="0"/> px
+                </div>
+                <div class="quarter">
+                    width: <input class="input--pos piece-w is-retina" type="number" value="0"/> px
+                    <div class="spacer"></div>
+                    height: <input class="input--pos piece-h is-retina" type="number" value="0"/> px
+                </div>
+
+            </div>
+            <div>
+                <div class="half">
+                    <div class="sprite sprite--preview preview--normal"></div>
+                </div>
+                <div class="half">
+                    <div class="sprite sprite--preview preview--retina"></div>
+                </div>
+            </div>
+            <div class="headline-component--remove-space">
+                <div class="headline-component headline-component--left">
+                    <h2 class="headline-component__headline">
+                        Spritearea
+                    </h2>
+
+                    <h2 class="headline-component__helpline">Click to set the left/top position of your selected
+                        piece.<br/>Drag & drop and also use the arrow-keys to positionize the selected piece.</h2>
+                </div>
+            </div>
+            <div>
+                <div class="full">
+                    <div class="sprite--wrapper">
+                        <div class="sprite-piece cursor-move">
+                            <div class="sprite-resize"></div>
+                        </div>
+                        <div class="sprite-piece is-retina cursor-move">
+                            <div class="sprite-resize"></div>
+                        </div>
+                        <img class="sprite sprite--image"/>
+                    </div>
+
+                    <div class="spacer"></div>
+                    width: <input id="spriteW" class="input--pos" type="number" value=""/> px &nbsp;
+                    height: <input id="spriteH" class="input--pos" type="number" value=""/> px
+                </div>
+            </div>
+            <div class="headline-component--remove-space">
+                <div class="half">
+                    <div class="headline-component headline-component--left">
+                        <h2 class="headline-component__headline">
+                            Spriteimage
+                        </h2>
+
+                        <h2 class="headline-component__helpline">Absolute pathes are possible too</h2>
+                    </div>
+                </div>
+                <div class="half">
+                    <div class="headline-component headline-component--left">
+                        <h2 class="headline-component__headline">
+                            Generated css
+                        </h2>
+
+                        <h2 class="headline-component__helpline">Click to copy the css into clipboard</h2>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="half">
+                    url: <input id="spriteUrl" type="text" value="/sprite.png"/>
+                </div>
+                <div class="half">
+                    <textarea id="textareaGeneratedCss" spellcheck="false"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

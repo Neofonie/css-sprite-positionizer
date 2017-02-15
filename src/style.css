@@ -1,3 +1,48 @@
+body {
+    font-family: 'Playfair Display', serif;
+}
+
+h1 {
+    margin-top: 10px;
+    line-height: 45px;
+}
+
+h2 {
+    margin-top: 10px;
+    line-height: 35px;
+}
+
+input, textarea {
+    font-family: verdana;
+    background: #7F7F7F;
+    border: 0;
+    color: #fff;
+    padding: 2px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 20px;
+    outline: 0;
+}
+
+textarea {
+    width: 300px;
+    height: 280px;
+    -webkit-transition: background 250ms ease-in-out;
+    -moz-transition: background 250ms ease-in-out;
+    -o-transition: background 250ms ease-in-out;
+    transition: background 250ms ease-in-out;
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+    background: #979797;
+}
+
+textarea.copied {
+    background: #fff;
+}
+
 .cursor-move {
     cursor: move;
     user-select: none;
