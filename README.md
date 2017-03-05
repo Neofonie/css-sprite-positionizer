@@ -1,4 +1,4 @@
-# CSS-Sprite-Positionizr
+# CSS Sprite Positionizr
 A tool to get your coordinates out of the sprite, for regular and retina piece.
 
 ## Demo
